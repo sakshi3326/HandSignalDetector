@@ -15,6 +15,8 @@ while True:
         imgWhite = np.ones((imgsize,imgsize,3),np.uint8)*255
 
         imgcrop = img[y-offset:y+h+offset,x-offset:x+w+offset]
+
+        imgWhite[0:imgcrop.shape[0], 0:imgcrop.shape[1]] = imgcrop
         cv2.imshow("imageCrop", imgcrop)
         cv2.imshow("imageWhite", imgWhite)
 
