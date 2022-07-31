@@ -36,7 +36,7 @@ while True:
             wGap = math.ceil((imgsize-wcal)/2)
 
             imgWhite[:, wGap:wcal+wGap] = imgresize
-            prediction, index =classifier.getPrediction(imgWhite)
+            prediction, index =classifier.getPrediction(imgWhite,draw=False)
             print(prediction,index)
 
         else:
@@ -45,8 +45,9 @@ while True:
             imgresize = cv2.resize(imgcrop, (imgsize,hcal))
             hGap = math.ceil((imgsize - hcal) / 2)
             imgWhite[hGap:hcal + hGap, :] = imgresize
-            prediction, index = classifier.getPrediction(imgWhite)
+            prediction, index = classifier.getPrediction(imgWhite,draw=False)
         cv2.putText(imgout,labels[index],(x,y-20),cv2.FONT_HERSHEY_COMPLEX,2,(255,0,255),2)
+        cv2.rectangle(imgout,(x-offset,y-offset),(x+w+offset,y+h+offset),(255,0,255),4)
         cv2.imshow("imageCrop", imgcrop)
         cv2.imshow("imageWhite", imgWhite)
 
