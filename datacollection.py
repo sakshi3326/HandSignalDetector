@@ -24,9 +24,9 @@ while True:
             k = imgsize/h
             wcal = math.ceil(k*w)
             imgresize = cv2.resize(imgcrop,(wcal,imgsize))
+            wGap = math.ceil((imgsize-wcal)/2)
 
-
-            imgWhite[0:imgresize.shape[0], 0:imgresize.shape[1]] = imgresize
+            imgWhite[:, wGap:wcal+wGap] = imgresize
 
         cv2.imshow("imageCrop", imgcrop)
         cv2.imshow("imageWhite", imgWhite)
