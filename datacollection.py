@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import math
 from cvzone.HandTrackingModule import HandDetector
 cap = cv2.VideoCapture(0)
 detector = HandDetector(maxHands=1)
@@ -16,7 +17,17 @@ while True:
 
         imgcrop = img[y-offset:y+h+offset,x-offset:x+w+offset]
 
-        imgWhite[0:imgcrop.shape[0], 0:imgcrop.shape[1]] = imgcrop
+
+
+        aspectRAtio = h/w
+        if aspectRAtio>1:
+            k = imgsize/h
+            wcal = math.ceil(k*w)
+            imgresize = cv2.resize(imgcrop,(wcal,imgsize))
+
+
+            imgWhite[0:imgresize.shape[0], 0:imgresize.shape[1]] = imgresize
+
         cv2.imshow("imageCrop", imgcrop)
         cv2.imshow("imageWhite", imgWhite)
 
